@@ -1,6 +1,6 @@
 name: ⚡ Grype - Vulnerability Scan (JSON)
 on: 
-  workflow_dispatch:
+    workflow_dispatch:
 jobs:
   build:
     name: Build
@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Build the container image
         run: docker build . --file Dockerfile --tag ghbuild/testimage:latest
 
@@ -19,16 +19,15 @@ jobs:
           image: "ghbuild/testimage:latest"
           fail-build: false
           severity-cutoff: critical
-          output: "json"  # Set the output format to JSON
+          output-format: json  # Set the desired output format to JSON
 
-      - name: Save Grype JSON report
-        run: echo "${{ steps.scan.outputs.json }}" > grype-report.json  # Save the JSON report to a file
+      # Optional step to inspect the JSON report produced
+      - name: Inspect action JSON report
+        run: cat ${{ steps.scan.outputs.json }}
 
-      - name: Upload Grype JSON report as an artifact
+      # Optional step to upload the JSON report as artifact
+      - name: Upload Grype JSON report as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: grype-report
-          path: grype-report.json
-
-      - name: Inspect the Grype JSON report
-        run: cat grype-report.json
+          name: grype-report-json
+          path: ${{ steps.scan.outputs.json }}
