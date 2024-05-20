@@ -27,3 +27,10 @@ jobs:
 
       - name: Inspect action SARIF report
         run: cat ${{ steps.scan.outputs.sarif }}
+
+        # Optional step to upload the JSON report as artifact
+      - name: Upload Grype JSON report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: grype-report-sarif
+          path: ${{ steps.scan.outputs.sarif }}
