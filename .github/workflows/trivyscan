@@ -1,0 +1,23 @@
+name: ⚡ Trivy - Vulnerability Scan
+on:
+    workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: [self-hosted, prod-runner]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build an image from Dockerfile
+        run: docker build . --file Dockerfile --tag ghbuild/testimage:latest
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ghbuild/testimage:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
