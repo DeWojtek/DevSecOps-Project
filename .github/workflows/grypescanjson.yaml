@@ -27,7 +27,7 @@ jobs:
 
       # Optional step to upload the JSON report as artifact
       - name: Upload Grype JSON report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: grype-report-json
           path: ${{ steps.scan.outputs.json }}
