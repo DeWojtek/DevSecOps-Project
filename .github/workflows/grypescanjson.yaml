@@ -1,4 +1,4 @@
-name: ⚡ Grype - Vulnerability Scan
+name: ⚡ Grype - Vulnerability Scan (JSON)
 on: 
   workflow_dispatch:
 jobs:
