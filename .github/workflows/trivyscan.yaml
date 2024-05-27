@@ -3,7 +3,7 @@ on:
     workflow_dispatch:
 jobs:
   build:
-    name: Build
+    name: Build & Scan
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
