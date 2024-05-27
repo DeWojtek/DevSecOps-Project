@@ -1,4 +1,4 @@
-name: ⚡ Trivy - Vulnerability Scan
+name: 🩻 Trivy - Vulnerability Scan
 on:
     workflow_dispatch:
 jobs:
@@ -19,8 +19,8 @@ jobs:
           image-ref: 'ghbuild/testimage:latest'
           format: 'json'
           output: 'trivy-results.json'
-          ignore-unfixed: true
-          vuln-type: 'library'
+          ignore-unfixed: false
+          vuln-type: 'os,library'
           severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
           
       - name: Upload Trivy JSON report as artifact
