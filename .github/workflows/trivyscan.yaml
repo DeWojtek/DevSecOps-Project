@@ -16,11 +16,10 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'image'
-          scanners: 'vuln'
           image-ref: 'ghbuild/testimage:latest'
           format: 'json'
           output: 'trivy-results.json'
-          ignore-unfixed: true
+          ignore-unfixed: false
           vuln-type: 'os,library'
           severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
 
