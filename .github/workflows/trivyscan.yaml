@@ -16,7 +16,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'image'
-          security-checks: 'vuln,secret,image'
+          security-checks: 'vuln,secret,config'
           image-ref: 'ghbuild/testimage:latest'
           format: 'json'
           output: 'trivy-results.json'
